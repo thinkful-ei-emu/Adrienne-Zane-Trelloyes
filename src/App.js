@@ -6,14 +6,21 @@ import STORE from './store.js';
 
 export default function App(props) {
   const firstListCards = STORE.lists[0].cardIds.map(card => (STORE.allCards[card]));
-  console.log(STORE.lists.header.map(header => (STORE))
+  const headerName=STORE.lists[0].header;
   return (
     <main>
       <header className="App-header">
         <h1>Trelloyes!</h1>
       </header>
       <div className="App-list">
-        <List header="" cards={firstListCards} />
+        {STORE.lists.map(list=>(
+          <List 
+          key={list.id}
+          header={list.header}
+          cards={list.cardIds.map(id=>STORE.allCards[id])}
+        />
+        ))}
+        
       </div>
     </main>
   );
